@@ -7,9 +7,10 @@ export async function getStaticProps() {
     accessToken: process.env.CONTENTFUL_ACCESS_KEY,
   })
   const res = await client.getEntries({ content_type: 'recipe' })
-  return { props: {
-    recipes: res.items
-  }}
+    return { 
+      props: {recipes: res.items},
+      revalidate: 1,
+    }
 }
 
 export default function Recipes({recipes}) {

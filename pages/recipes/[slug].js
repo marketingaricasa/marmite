@@ -15,9 +15,11 @@ export const getStaticPaths = async () => {
   })
   const paths = res.items.map(item => {
     return { 
-      params: {slug: item.fields.slug},
-      // la proprietà REVALIDATE attiva la rigenerazione della pagina corrente ogni x secondi (in questo caso 1), ma solo se next rileva una modifica nelle pagine web o nei contenuti remoti, e solo se un utente richiede la pagina web -> trasformi una pagina statica in una semi-dinamica
-      revalidate: 1,
+      params: {
+        slug: item.fields.slug, 
+        // il parametro REVALIDATE attiva la rigenerazione della pagina corrente ogni x secondi (in questo caso 1), ma solo se next rileva una modifica nelle pagine web o nei contenuti remoti, e solo se un utente richiede la pagina web -> trasformi una pagina statica in una semi-dinamica
+        revalidate: 1,
+      }
     }
   })
   return { paths, fallback: false}

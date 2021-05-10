@@ -3,6 +3,7 @@ import Image from 'next/image'
 /** il campo Method è un richtext e richiede un componente esterno per essere renderizzato */
 /** si installa con npm install @contentful/rich-text-react-renderer */
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+import Skeleton from '../../components/Skeleton'
 
 const client = createClient ({
   space: process.env.CONTENTFUL_SPACE_ID,
@@ -35,6 +36,8 @@ export async function getStaticProps ({params}) {
 
 
 export default function RecipeDetails({recipe}) {
+  if(!recipe)
+    return <div><Skeleton /></div>
   console.log(recipe)
   const {feauturedImage, title, cookingTime, ingredients, method} = recipe.fields
   return (
